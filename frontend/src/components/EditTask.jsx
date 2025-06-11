@@ -14,7 +14,15 @@ const EditTask = () => {
     useEffect(() => {
         const fetchTask = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/api/tasks/${id}`)
+                const token = localStorage.getItem('token');
+                const response = await axios.get(
+                  `${API_BASE_URL}/api/tasks/${id}`,
+                  {
+                    headers: {
+                      Authorization: `Bearer ${token}`,
+                    },
+                  }
+                );
                 const task = response.data.data
                 setTitle(task.title)
                 setDescription(task.description)
@@ -29,9 +37,16 @@ const EditTask = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.put(`${API_BASE_URL}/api/tasks/${id}`, {
-                title, description, dueDate
-            })
+            const token = localStorage.getItem('token');
+            await axios.put(
+                `${API_BASE_URL}/api/tasks/${id}`,
+                { title, description, dueDate },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
             navigate('/')
         } catch (err) {
             console.error('Error updating task:', err)
