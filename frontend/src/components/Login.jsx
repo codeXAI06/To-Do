@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 /**
  * Login component.
  * Allows users to log in with their username and password.
@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault()
     setError('')
     try {
-      const res = await axios.post('/api/users/login', { username, password })
+      const res = await axios.post(`${API_BASE_URL}/api/users/login`, { username, password })
       localStorage.setItem('token', res.data.token)
       navigate('/tasks') // Redirect to tasks page on successful login
     } catch (err) {

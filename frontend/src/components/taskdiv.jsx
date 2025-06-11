@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { FaEdit, FaCheckCircle, FaPlus, FaSignOutAlt } from 'react-icons/fa'
-
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 /**
  * Taskdiv component.
  * Displays the list of tasks for the logged-in user.
@@ -34,7 +34,7 @@ const Taskdiv = () => {
   const fetchTasks = async () => {
     try {
       const token = localStorage.getItem('token')
-      const response = await axios.get('/api/tasks', {
+      const response = await axios.get(`${API_BASE_URL}/api/tasks`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -55,7 +55,7 @@ const Taskdiv = () => {
   const deleteTask = async (id) => {
     try {
       const token = localStorage.getItem('token')
-      await axios.delete('/api/tasks/' + id, {
+      await axios.delete(`${API_BASE_URL}/api/tasks/` + id, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

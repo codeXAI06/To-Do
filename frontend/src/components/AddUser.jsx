@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 /**
  * AddUser (Registration) component.
@@ -23,7 +24,7 @@ const AddUser = () => {
     e.preventDefault()
     setError('')
     try {
-      const res = await axios.post('/api/users/register', {
+      const res = await axios.post(`${API_BASE_URL}/api/users/register`, {
         username,
         password,
       })

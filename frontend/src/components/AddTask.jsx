@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 /**
  * AddTask component.
@@ -24,7 +25,7 @@ const AddTask = () => {
     try {
       const token = localStorage.getItem('token')
       const res = await axios.post(
-        '/api/tasks',
+        `${API_BASE_URL}/api/tasks`,
         { title, description, dueDate },
         {
           headers: {

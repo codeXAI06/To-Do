@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 import React from 'react'
 
@@ -14,7 +14,7 @@ const EditTask = () => {
     useEffect(() => {
         const fetchTask = async () => {
             try {
-                const response = await axios.get(`/api/tasks/${id}`)
+                const response = await axios.get(`${API_BASE_URL}/api/tasks/${id}`)
                 const task = response.data.data
                 setTitle(task.title)
                 setDescription(task.description)
@@ -29,7 +29,7 @@ const EditTask = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            const res = await axios.put(`/api/tasks/${id}`, {
+            const res = await axios.put(`${API_BASE_URL}/api/tasks/${id}`, {
                 title, description, dueDate
             })
             navigate('/')
