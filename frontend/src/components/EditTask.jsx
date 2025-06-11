@@ -47,7 +47,7 @@ const EditTask = () => {
                     },
                 }
             );
-            navigate('/')
+            navigate('/tasks')
         } catch (err) {
             console.error('Error updating task:', err)
         }
