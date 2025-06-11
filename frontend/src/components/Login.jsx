@@ -19,14 +19,18 @@ const Login = () => {
    * Sends credentials to backend and stores JWT on success.
    */
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
+    e.preventDefault();
+    setError('');
     try {
-      const res = await axios.post(`${API_BASE_URL}/api/users/login`, { username, password })
-      localStorage.setItem('token', res.data.token)
-      navigate('/tasks') // Redirect to tasks page on successful login
+      const res = await axios.post(`${API_BASE_URL}/api/users/login`, { username, password });
+      if (res.data && res.data.token) {
+        localStorage.setItem('token', res.data.token);
+        navigate('/tasks'); // Redirect to tasks page on successful login
+      } else {
+        setError('Invalid username or password.');
+      }
     } catch (err) {
-      setError('Invalid username or password.')
+      setError('Invalid username or password.');
     }
   }
 
