@@ -26,5 +26,3 @@ app.listen(Port,()=>{
     console.log("server running at http://localhost:"+Port);
 });
 
-// FmJhcomazwuY49yh password
-// connection string: mongodb+srv://23eg107c59:<db_password>@tasks.y9nn7zz.mongodb.net/?retryWrites=true&w=majority&appName=Tasks
